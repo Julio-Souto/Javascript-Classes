@@ -11,6 +11,10 @@ function isValid(){
   let tipbol = false;
   let chipbol = false;
   let edadbol = false;
+//  let expReg = /^[a-zA-Z\u00C0-\u017F\s]+$/
+//  let expReg1 = /^[0-9]{15}+$/
+
+  deleteError()
 
   if(!isNaN(nombre.value)||notEmpty(nombre.value))
     nombol = true
@@ -52,6 +56,17 @@ function notEmpty(value){
 
 function warning(input){
   input.style.outline= "2px solid red";
+  input.focus();
+  let textEl = document.createElement("p")
+  textEl.classList.add("error")
+  textEl.innerHTML = "Valor introducido no válido "+input.value
+  input.parentElement.appendChild(textEl)
+}
+
+function deleteError(){
+  let errorEl = document.querySelectorAll(".error")
+  for(let i = 0; i < errorEl.length; i++)
+    errorEl[i].parentElement.removeChild(errorEl[i])
 }
 
 function valid(input){
